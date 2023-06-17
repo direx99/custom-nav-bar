@@ -1,15 +1,55 @@
-import { Image, StyleSheet, Text, View } from 'react-native';
-import React from 'react';
+import { Image,Animated, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import React, { useEffect, useRef, useState } from 'react';
 import homeicon from './Assets/home.png';
 
 const NavBar = () => {
+  const [select,setSelected] = useState('Home')
+  const FadeInView = props => {
+    const fadeAnim = useRef(new Animated.Value(0)).current; // Initial value for opacity: 0
+  
+    useEffect(() => {
+      Animated.timing(fadeAnim, {
+        toValue: 1,
+        duration: 500,
+        useNativeDriver: true,
+      }).start();
+    }, [fadeAnim]);
+  
+    return (
+      <Animated.View // Special animatable View
+        style={{
+          ...props.style,
+          opacity: fadeAnim, // Bind opacity to animated value
+        }}>
+        {props.children}
+      </Animated.View>
+    );
+  };
+
+  const NavIcon = (props)=> {
 
 
-  const NavIcon = ()=> {
+
     return(
-<View style={styles.IconContainer}>
+      <View>
+      {
+        select == props.title ? (
+          <FadeInView style={styles.IconContainer}>
         <Image style={styles.homeicon} source={homeicon}/>
-        <Text style={styles.IconText}>Home</Text>
+        <Text style={styles.IconText}>{props.title}</Text>
+
+      </FadeInView>
+        ):(
+          <FadeInView style={styles.IconContainerInactive}>
+                        <TouchableOpacity onPress={()=>{setSelected(props.title)}}>
+                        <Image style={styles.homeicon} source={homeicon}/>
+
+                        </TouchableOpacity>
+
+
+      </FadeInView>
+        )
+      }
 
       </View>
      
@@ -18,9 +58,11 @@ const NavBar = () => {
 
   return (
     <View style={styles.NavBar}>
-      <NavIcon/>
-      <NavIcon/>
-      <NavIcon/>
+      <NavIcon title='Home'/>
+      <NavIcon title='Explore'/>
+      <NavIcon title='Stats'/>
+      <NavIcon title='History'/>
+      <NavIcon title='Account'/>
 
 
     </View>
@@ -41,7 +83,13 @@ const styles = StyleSheet.create({
     },
     homeicon:{
       width:30,
-      height:30
+      height:30,
+
+    },
+    homeiconActive:{
+      width:25,
+      height:25,
+
     },
     IconContainer:{
       backgroundColor:'#2C2B3E',
@@ -50,13 +98,26 @@ const styles = StyleSheet.create({
       justifyContent:'center',
       alignItems:'center',
       flexDirection:'row',
-      gap:10,
-      borderRadius:30
+      gap:5,
+      borderRadius:30,
+      transition: 'all 1.9s ease',
+
 
     },
     IconText:{
       color:'#9F87FD',
       fontWeight:500,
       fontSize:16
+    },
+    IconContainerInactive:{
+      padding:10,
+      paddingHorizontal:15,
+      justifyContent:'center',
+      alignItems:'center',
+      flexDirection:'row',
+      borderRadius:30,
+      transition: 'all 0.9s ease',
+
     }
+    
 })
