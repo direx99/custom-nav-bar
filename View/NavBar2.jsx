@@ -15,7 +15,7 @@ import UserI from './Assets/useri.png';
 
 
 
-const NavBar = () => {
+const NavBar2 = () => {
   const [select,setSelected] = useState('Home')
   const FadeInView = props => {
     const fadeAnim = useRef(new Animated.Value(0)).current; // Initial value for opacity: 0
@@ -82,18 +82,19 @@ const NavBar = () => {
   )
 }
 
-export default NavBar
+export default NavBar2
 
 const styles = StyleSheet.create({
     NavBar:{
         backgroundColor:'#1E1F24',
         width:'100%',
-        height:100,
         justifyContent:'space-between',
         flexDirection:'row',
         paddingBottom:30,
-        paddingHorizontal:15,
-        paddingTop:10
+        paddingHorizontal:25,
+        paddingTop:10,
+        height:100,
+
     },
     homeicon:{
       width:26,
@@ -106,15 +107,15 @@ const styles = StyleSheet.create({
 
     },
     IconContainer:{
-      backgroundColor:'#2C2B3E',
-      padding:10,
-      paddingHorizontal:15,
+      paddingVertical:10,
       justifyContent:'center',
       alignItems:'center',
       flexDirection:'row',
       gap:5,
-      borderRadius:30,
+      borderTopColor:'#9F86FB',
       transition: 'all 1.9s ease',
+      borderTopWidth:3,
+      marginTop:-12
 
 
     },
@@ -124,13 +125,12 @@ const styles = StyleSheet.create({
       fontSize:14
     },
     IconContainerInactive:{
-      padding:10,
-      paddingHorizontal:15,
+      paddingVertical:10,
       justifyContent:'center',
       alignItems:'center',
       flexDirection:'row',
-      borderRadius:30,
       transition: 'all 0.9s ease',
+      marginTop:-10,
 
     }
     

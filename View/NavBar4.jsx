@@ -15,7 +15,7 @@ import UserI from './Assets/useri.png';
 
 
 
-const NavBar = () => {
+const NavBar4 = () => {
   const [select,setSelected] = useState('Home')
   const FadeInView = props => {
     const fadeAnim = useRef(new Animated.Value(0)).current; // Initial value for opacity: 0
@@ -53,9 +53,10 @@ const NavBar = () => {
 
       </View>
         ):(
-          <View style={styles.IconContainerInactive}>
-                        <TouchableOpacity onPress={()=>{setSelected(props.title)}}>
+          <View >
+                        <TouchableOpacity style={styles.IconContainerInactive} onPress={()=>{setSelected(props.title)}}>
                         <Image style={styles.homeicon} source={props.imgi}/>
+                        <Text style={styles.IconTextI}>{props.title}</Text>
 
                         </TouchableOpacity>
 
@@ -82,18 +83,18 @@ const NavBar = () => {
   )
 }
 
-export default NavBar
+export default NavBar4
 
 const styles = StyleSheet.create({
     NavBar:{
         backgroundColor:'#1E1F24',
         width:'100%',
-        height:100,
         justifyContent:'space-between',
         flexDirection:'row',
         paddingBottom:30,
         paddingHorizontal:15,
-        paddingTop:10
+        paddingTop:10,
+        height:100
     },
     homeicon:{
       width:26,
@@ -101,18 +102,15 @@ const styles = StyleSheet.create({
 
     },
     homeiconActive:{
-      width:25,
-      height:25,
+      width:22,
+      height:22,
 
     },
     IconContainer:{
-      backgroundColor:'#2C2B3E',
-      padding:10,
       paddingHorizontal:15,
       justifyContent:'center',
       alignItems:'center',
-      flexDirection:'row',
-      gap:5,
+      gap:7,
       borderRadius:30,
       transition: 'all 1.9s ease',
 
@@ -121,17 +119,20 @@ const styles = StyleSheet.create({
     IconText:{
       color:'#9F87FD',
       fontWeight:500,
-      fontSize:14
+      fontSize:13
+    },
+    IconTextI:{
+      color:'#676B74',
+      fontWeight:500,
+      fontSize:13
     },
     IconContainerInactive:{
-      padding:10,
       paddingHorizontal:15,
       justifyContent:'center',
       alignItems:'center',
-      flexDirection:'row',
+      gap:7,
       borderRadius:30,
-      transition: 'all 0.9s ease',
-
+      transition: 'all 1.9s ease',
     }
     
 })
